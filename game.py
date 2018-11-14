@@ -28,14 +28,15 @@ x = (display_width * 0.45)
 y = (display_height * 0.8)
 x_change = 0
 car_speed = 0
+car_width = 73
 
-crashed = False
+gameExit = False
 clock = pygame.time.Clock()
 
-while not crashed:
+while not gameExit:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-            crashed = True
+            gameExit = True
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_LEFT:
@@ -51,6 +52,10 @@ while not crashed:
 
     gameDisplay.fill(white)
     car(x, y)
+
+    # if car cross the boundaries exit the game
+    if x > display_width - car_width or x < 0:
+        gameExit = True
 
     pygame.display.update()
     clock.tick(60)
