@@ -1,5 +1,6 @@
 import pygame
 import time
+import random
 
 
 pygame.init()
@@ -22,6 +23,11 @@ car_width = 73
 
 # We are loading racecar image to a variable
 carImg = pygame.image.load('racecar.png')
+
+
+def things(thingx, thingy, thingw, thingh, color):
+    # draw rectangle function parameters: where to draw/ what color/ location parameters
+    pygame.draw.rect(gameDisplay, color, [thingx, thingy, thingw, thingh])
 
 
 # car function places the car on the display
@@ -60,6 +66,18 @@ def game_loop():
 
     x_change = 0
 
+    # starting point of a block to be avoided
+    thing_startx = random.randrange(0, display_width)
+    # we want to start an object off the screen
+    thing_starty = -600
+
+    # how fast we want to an object to move
+    thing_speed = 7
+
+    # dimensions of an object
+    thing_width = 100
+    thing_height = 100
+
     gameExit = False
 
     while not gameExit:
@@ -81,11 +99,19 @@ def game_loop():
         x += x_change
 
         gameDisplay.fill(white)
+
+        things(thing_startx, thing_starty, thing_width, thing_height, black)
+        thing_starty += thing_speed
+
         car(x, y)
 
         # if car cross the boundaries exit the game
         if x > display_width - car_width or x < 0:
             crash()
+
+        if thing_starty > display_height:
+            thing_starty = 0 - thing_height
+            thing_startx = random.randrange(0, display_width)
 
         pygame.display.update()
         clock.tick(60)
