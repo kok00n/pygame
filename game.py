@@ -22,7 +22,7 @@ car_speed = 0
 car_width = 73
 
 # We are loading racecar image to a variable
-carImg = pygame.image.load('racecar.png')
+carImg = pygame.image.load('racecar.png').convert_alpha()
 
 
 def things(thingx, thingy, thingw, thingh, color):
