@@ -42,6 +42,14 @@ class FpsView(object):
             # self.draw_circle(where=((self.width - radius) // 2,
             #                         (self.height - radius) // 2), radius=int(radius / 2) , color=(255, 192, 203))
 
+            # pygame.draw.arc(Surface, color, Rect, start_angle, stop_angle, width=1): return Rect
+            pygame.draw.arc(self.background, (0, 150, 0),
+                            (self.width - 150, 0, 150, 100), 0, math.pi)  # radiant instead of grad
+
+            # draw arc on the lower-left corner
+            pygame.draw.arc(self.background, (0, 150, 0),
+                            (0, self.height - 50, 150, 100), 0, math.pi)
+
             pygame.display.update()
             self.screen.blit(self.background, (0, 0))
 
