@@ -50,6 +50,9 @@ class FpsView(object):
             pygame.draw.arc(self.background, (0, 150, 0),
                             (0, self.height - 50, 150, 100), 0, math.pi)
 
+            # pretty pattern in all corners
+            self.draw_pretty_pattern()
+
             pygame.display.update()
             self.screen.blit(self.background, (0, 0))
 
@@ -102,6 +105,16 @@ class FpsView(object):
         pygame.draw.polygon(surface, color, (a1, a2, a9), 4)
         pygame.draw.polygon(surface, color, (a2, a3, a10), 4)
         self.screen.blit(surface, where)
+
+    def draw_pretty_pattern(self, step=16, color=(255, 0, 255), line_width=1):
+        where_to_draw = self.background
+        area_width = self.width
+        area_height = self.height
+        for point in range(0, area_height + 1, area_height // step):  # range(start, stop, step)
+            pygame.draw.line(where_to_draw, color, (0, 0), (area_width // 2, point), line_width)
+            pygame.draw.line(where_to_draw, color, (area_width, 0), (area_width // 2, point), line_width)
+            pygame.draw.line(where_to_draw, color, (0, area_height), (area_width // 2, point), line_width)
+            pygame.draw.line(where_to_draw, color, (area_width, area_height), (area_width // 2, point), line_width)
 
 
 if __name__ == '__main__':
